@@ -7,13 +7,26 @@ using namespace arma;
 
 
 int main() {
-    int N;
-    N = 10;
+    unsigned int n = 10;
+    int d = 3;
+    int a = 1;
 
-    mat A(N,N);
+    Mat<double> A(n, n, fill::zeros);
 
-    cout << "A.n_rows = " << A.n_rows << endl;
-    cout << "A.n_cols = " << A.n_cols << endl;
+    for(unsigned int i=0; i<n; i++){
+        A(i,i) = d;
+    }
 
-    A.print("A:");
+    for(unsigned int i=0; i<n-3; i++){
+        A(i+3,i) = a;
+        A(i,i+3) = a;
+    }
+
+    Mat<double> P, L, U;
+
+    lu(P, L, U, A);
+
+    cout << A << endl << P << endl << L << endl << U << endl;
+
+    return 0;
 }
