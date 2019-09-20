@@ -14,3 +14,6 @@ LIBS += \
 SOURCES += \
         main.cpp \
         jacobi.cpp \
+
+HEADERS += \
+        jacobi.h \
