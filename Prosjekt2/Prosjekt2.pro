@@ -12,4 +12,5 @@ LIBS += \
     -lblas_win64_MT
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+        jacobi.cpp \
