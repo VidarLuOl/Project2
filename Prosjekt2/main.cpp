@@ -8,8 +8,8 @@ using namespace arma;
 
 
 int main() {
-    unsigned int n = 10;
-    double h = 1/n;
+    unsigned int n = 3;
+    double h = 1.0/n;
     double d = 2/h*h;
     double a = -1/h*h;
 
@@ -39,7 +39,8 @@ int main() {
     eig_sym(eigval, eigvec, A);
 
     //Må finne ut en måte å kalle på funksjonen
-    rotate(A, R, 5, 3, n);
+    jacobi_method(A, R, n);
+
 
     cout << eigval << " " << eigvec << endl;
     return 0;

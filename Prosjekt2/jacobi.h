@@ -1,8 +1,11 @@
+#include <armadillo>
 #ifndef JACOBI_H
 #define JACOBI_H
 
-double maxoffdiag ( double ** A, int * k, int * l, int n );
-void rotate ( double ** A, double ** R, int k, int l, int n );
-void jacobi_method ( double ** A, double ** R, int n );
+using namespace arma;
+
+double maxoffdiag ( mat &A, int * k, int * l, int n );
+void rotate ( mat &A, mat &R, int k, int l, int n );
+void jacobi_method ( mat &A, mat &R, int n );
 
 #endif // JACOBI_H
