@@ -41,6 +41,7 @@ int main() {
     //Må finne ut en måte å kalle på funksjonen
     jacobi_method(A, R, n);
 
+
     cout << eigval << " " << eigvec << endl;
     return 0;
 }
