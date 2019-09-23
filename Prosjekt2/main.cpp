@@ -1,15 +1,17 @@
 #include <iostream>
-#include "jacobi.h"
-#include <armadillo>
+#include "jacobi.h"  //Gathers functions from jacobi.cpp
+#include <armadillo> //Matrix maker
+#include <math.h>    //Sin, cos
 
 using namespace std;
 using namespace arma;
 
 
 int main() {
-    unsigned int n = 10;
-    int d = 3;
-    int a = 1;
+    unsigned int n = 3;
+    double h = 1.0/n;
+    double d = 2/h*h;
+    double a = -1/h*h;
 
     Mat<double> A(n, n, fill::zeros);
 
@@ -31,8 +33,14 @@ int main() {
     vec eigval;
     mat eigvec;
 
+    Mat<double> R(n, n, fill::zeros);
+
+    //Skal sammenligne eigval med verdiene fra rotasjon funksjonen i jacobi.cpp
     eig_sym(eigval, eigvec, A);
 
-    cout << eigval << endl;
+    //Må finne ut en måte å kalle på funksjonen
+    jacobi_method(A, R, n);
+
+    cout << eigval << " " << eigvec << endl;
     return 0;
 }
