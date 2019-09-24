@@ -45,5 +45,6 @@ int main() {
     jacobi_method(A, R, n);
 
 //    cout << R << "\n " << eigvec << endl;
+    cout << eigval << endl;
     return 0;
 }
