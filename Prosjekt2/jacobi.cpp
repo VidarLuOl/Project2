@@ -134,10 +134,5 @@ void jacobi_method ( mat &A, mat &R, int n )
     chrono::duration<double> elapsed = (finish - start);
     cout << "Jacobi's method: " << elapsed.count() << " s\n";
 
-    vec eigval = A.diag();
-
-    for (int i = 0; i < n; i++) {
-        cout << eigval(i) << endl;
-    }
     return;
 }
