@@ -7,7 +7,7 @@ using namespace arma;
 
 TEST_CASE("Test eigenvalues"){
 
-    int n = 10;
+    int n = 5;
     // Set up exact eigenvalues
     vec exact_eigval(n);
 
@@ -36,13 +36,11 @@ TEST_CASE("Test eigenvalues"){
 
     jacobi_method(A, R, n);
 
-    num_eigval = A.diag();
+    num_eigval = sort(A.diag());
 
-    // the eigenvalues are the same, but in different order - what to do?
-    int p = 2;
-    REQUIRE(p == 2);
-    REQUIRE(num_eigval(0)==Approx(exact_eigval(0)).epsilon(0.000000000001));
-    REQUIRE(num_eigval[1]==Approx(exact_eigval(1)).epsilon(0.000000000001));
-    REQUIRE(num_eigval[2]==Approx(exact_eigval(2)).epsilon(0.000000000001));
+
+    for (int i=0; i < n; i++) {
+    REQUIRE(num_eigval(i)==Approx(exact_eigval(i)).epsilon(0.000000000001));
+    }
 }
 
