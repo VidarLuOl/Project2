@@ -1,19 +1,10 @@
-TEMPLATE = app
+TEMPLATE = subdirs
 CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
-INCLUDEPATH += C:\armadillo-9.600.6\include
-DEPENDPATH += C:\armadillo-9.600.6\include
 
+SUBDIRS += \
+    main-program \
+    tests
 
-LIBS += \
-    -LC:\armadillo-9.600.6\examples\lib_win64 \
-    -llapack_win64_MT \
-    -lblas_win64_MT
-
-SOURCES += \
-        main.cpp \
-        jacobi.cpp \
-
-HEADERS += \
-        jacobi.h \
+tests.depends = main-program
