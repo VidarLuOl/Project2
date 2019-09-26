@@ -9,8 +9,6 @@ DEPENDPATH += C:\armadillo-9.600.6\include
 LIBS += \
         -larmadillo -lblas -llapack
 
-INCLUDEPATH += \
-
 
 SOURCES += \
         tests-main.cpp \
@@ -18,6 +16,5 @@ SOURCES += \
         ../main-program/jacobi.cpp
 
 HEADERS += \
-#        ../main-program/jacobi.h \
         catch.hpp
 
