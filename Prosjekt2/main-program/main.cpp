@@ -1,6 +1,7 @@
 #include <iostream>
 #include "one_dimension.h"
 #include "three_dimensions.h"
+#include "bisection.h"
 
 using namespace std;
 
@@ -12,6 +13,8 @@ int main() {
     one_dimension(n);
 
     three_dimensions(n, rho_max);
+
+//    bisection(n);
 
 
     return 0;
