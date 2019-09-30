@@ -11,7 +11,7 @@ TEST_CASE("Test eigenvalues"){
     // Set up exact eigenvalues
     vec exact_eigval(n);
 
-    double pi = acos(-1.0);         // ?????????????????????
+    double pi = acos(-1.0);
     double h = 1.0/n;
     double d = 2.0/(h*h);
     double a = -1.0/(h*h);
@@ -34,7 +34,7 @@ TEST_CASE("Test eigenvalues"){
     }
     A(n-1, n-1) = d;
 
-    jacobi_method(A, R, n);
+    jacobi_method(A, R, n, false);
 
     num_eigval = sort(A.diag());
 
@@ -81,7 +81,7 @@ TEST_CASE("Test preserved orthogonality"){
     U(n-1, n-1) = cos(pi/4);
     U(n/2-1, n/2-1) = cos(pi/4);
 
-    jacobi_method(A, R, n);
+    jacobi_method(A, R, n, false);
 
     cout << dot(U*R.col(0), U*R.col(0)) << endl;
 
