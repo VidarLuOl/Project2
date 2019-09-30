@@ -32,9 +32,6 @@ double maxoffdiag ( mat &A, int * k, int * l, int n )
         }
     }
 
-//    uword i = A.index_max();
-//    double max_val = A(i);
-
     return max;
     }
 
@@ -91,12 +88,7 @@ void rotate ( mat &A, mat &R, int k, int l, int n ) {
     return;
 }
 
-void jacobi_method ( mat &A, mat &R, int n )
-{
-    // Setting up the eigenvector matrix
-//    for (int i = 0; i < n; i++) {
-//        R(i, i) = 1.0;
-//    }
+int jacobi_method ( mat &A, mat &R, int n, bool timing) {
 
     for ( int i = 0; i < n; i++ ) {
         for ( int j = 0; j < n; j++ ) {
@@ -113,25 +105,36 @@ void jacobi_method ( mat &A, mat &R, int n )
     double max_number_iterations = double (n * n * n);
     int iterations = 0;
 
-    // start timing
-    auto start = chrono::high_resolution_clock::now();
+    if (timing) {
+        // start timing
+        auto start = chrono::high_resolution_clock::now();
 
-    double max_offdiag = maxoffdiag ( A, &k, &l, n );
+        double max_offdiag = maxoffdiag ( A, &k, &l, n );
 
-    while ( fabs(max_offdiag) > epsilon && (double) iterations < max_number_iterations ) {
-        max_offdiag = maxoffdiag ( A, &k, &l, n );
-        rotate ( A, R, k, l, n );
-        iterations++;
+        while ( fabs(max_offdiag) > epsilon && (double) iterations < max_number_iterations ) {
+            max_offdiag = maxoffdiag ( A, &k, &l, n );
+            rotate ( A, R, k, l, n );
+            iterations++;
+        }
+
+        // end timing
+        auto finish = chrono::high_resolution_clock::now();
+
+        // print time
+        chrono::duration<double> elapsed = (finish - start);
+        cout << "Jacobi's method: " << elapsed.count() << " s" << endl;
+
+        cout << "Number of iterations: " << iterations << "\n" << endl;;
+    }
+    else {
+        double max_offdiag = maxoffdiag ( A, &k, &l, n );
+
+        while ( fabs(max_offdiag) > epsilon && (double) iterations < max_number_iterations ) {
+            max_offdiag = maxoffdiag ( A, &k, &l, n );
+            rotate ( A, R, k, l, n );
+            iterations++;
+        }
     }
 
-    // end timing
-    auto finish = chrono::high_resolution_clock::now();
-
-    // print time
-    chrono::duration<double> elapsed = (finish - start);
-    cout << "Jacobi's method: " << elapsed.count() << " s" << endl;
-
-    cout << "Number of iterations: " << iterations << "\n" << endl;;
-
-    return;
+    return iterations;
 }
