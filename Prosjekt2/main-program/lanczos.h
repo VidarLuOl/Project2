@@ -1,11 +1,6 @@
 #ifndef LANCZOS_H
 #define LANCZOS_H
 
-
-class Lanczos
-{
-public:
-    Lanczos();
-};
+void lanczos (unsigned int n);
 
 #endif // LANCZOS_H
