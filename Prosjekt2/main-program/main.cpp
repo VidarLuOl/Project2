@@ -37,8 +37,5 @@ int main() {
         ofile.close();
     }
 
-
-
-    lanczos(10);
     return 0;
 }
