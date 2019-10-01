@@ -1,7 +1,7 @@
 #include <iostream>
 #include "one_dimension.h"
 #include "three_dimensions.h"
-#include "bisection.h"
+#include "lanczos.h"
 #include <math.h>
 #include <fstream>
 #include <armadillo>
@@ -11,61 +11,34 @@ using namespace arma;
 
 
 int main() {
-//    double rho_max = 8.0;
-
-//    one_dimension(n);
-
-//    three_dimensions(n, rho_max);
-
-//    bisection(n);
-
-//    cout << ((1 + 0.000000000000001) > 1) << endl;
-//    cout << ((pow(2, 15))) << endl;
-//    cout << max(1, 2) << endl;
-
-//    initializing(10);
-
-
-
-    /*string file = "iterations.txt";
-    ofstream ofile;
-    ofile.open(file);
-
-    vec n_values = {10, 50, 100, 200, 500};
-    cout << n_values << endl;
-
-    for (int i=0; i<5; i++) {
-        unsigned int n = n_values[i];
-        ofile << n << one_dimension(n);
-    }
-
-    ofile.close();*/
-
 
     // writing the relative error to file
-    vec n_values = {10, 50, 100, 200, 500};
-    vec rho_max_values = {2, 5, 8};
+    vec n_values = {10, 25, 50, 75, 100, 200, 500};
+    // vec rho_max_values = {2, 4, 6, 8, 10, 20, 50, 100, 300};
+    vec rho_max_values = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21};
 
-    for (int i=0; i<3; i++) {
-        int rho_max = rho_max_values[i];
+    for (int i=0; i<6; i++) {
+        int n = n_values[i];
+        cout << n << endl;
 
         ofstream ofile;
-        string file = "error-rho_max-";
-        file.append(to_string(rho_max));
+        string file = "error-small-n-";
+        file.append(to_string(n));
         ofile.open(file);
 
-        for (int j=0; j<2; j++) {
-            int n = n_values[j];
+        for (int j=0; j<10; j++) {
+            double rho_max = rho_max_values[j];
 
             vec numerical_eigval = three_dimensions(n, rho_max, false);
-            double max = relative_error(n, numerical_eigval);
-            double h = rho_max/n;
+            double average = relative_error(n, numerical_eigval);
 
-            ofile << n << " " << log10(h) << " " << max << "\n";
+            ofile << n << " " << rho_max << " " << average << "\n";
         }
         ofile.close();
     }
 
 
+
+    lanczos(10);
     return 0;
 }
