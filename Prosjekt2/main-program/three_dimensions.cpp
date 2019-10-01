@@ -54,7 +54,6 @@ vec three_dimensions (unsigned int n, double rho_max, bool timing){
 }
 
 
-
 double relative_error (int n, vec numerical) {
     vec analytical(n);
 
@@ -67,17 +66,18 @@ double relative_error (int n, vec numerical) {
     //Calculate relative error
     double* eps = new double[n];
 
-    for (int i=1; i<n; i++){
-        eps[i-1] = log10(abs((numerical[i]-analytical[i])/analytical[i]));
+    for (int i=0; i<n; i++){
+        eps[i] = log10(abs((numerical[i]-analytical[i])/analytical[i]));
     }
 
-    //Find maximum element in error array
-    double max = eps[0];
-    for (int i=1; i<n; i++){
-        if (abs(eps[i]) > abs(max)) {
-            max = eps[i];
-        }
+    // Find average relative error
+    double sum = 0;
+    for (int i=0; i<n; i++) {
+        sum += eps[i];
     }
 
-    return max;
+    double average = sum/n;
+
+    return average;
 }
+
