@@ -49,14 +49,11 @@ TEST_CASE("Test preserved orthogonality"){
     // Set up exact eigenvalues
     vec exact_eigval(n);
 
-    double pi = acos(-1.0);         // ?????????????????????
+    double pi = acos(-1.0);
     double h = 1.0/n;
     double d = 2.0/(h*h);
     double a = -1.0/(h*h);
 
-    for (int i = 0; i < n; i++) {
-       exact_eigval(i) = d + 2*a*cos((i+1)*pi/(n + 1));
-    }
 
     // Get numerical eigenvalues
     vec num_eigvec(n);
@@ -91,11 +88,7 @@ TEST_CASE("Test preserved orthogonality"){
                 REQUIRE(dot(U*R.col(i), U*R.col(i))==Approx(1.0).epsilon(0.000000000001));
             }
             else {
-//                cout << dot(U*R.col(j), U*R.col(i)) << endl;
-//                cout << Approx(0.0).epsilon(0.1)) << endl;
                  REQUIRE((dot(U*R.col(j), U*R.col(i)))==Approx(0.0).margin(0.000000000001));
-
-//                REQUIRE(-0.00001==Approx(0.0).margin(0.1));
             }
         }
     }
